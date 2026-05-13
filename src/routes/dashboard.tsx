@@ -87,8 +87,8 @@ function Dashboard() {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Checkout screener"
-              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-xl font-medium tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors"
+              placeholder="e.g. research shit."
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-xl font-medium tracking-tight text-foreground placeholder:font-display placeholder:font-normal placeholder:italic placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors"
               required
             />
           </label>
@@ -99,7 +99,7 @@ function Dashboard() {
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="What are you trying to learn?"
-              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:font-display placeholder:italic placeholder:text-lg placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
             />
           </label>
           {error && (
