@@ -79,34 +79,33 @@ function Dashboard() {
 
         <form
           onSubmit={handleSave}
-          className="relative note-shadow rounded-[3px] p-6 md:p-8 mb-12"
-          style={{ background: "var(--note-sky)", transform: "rotate(-0.4deg)" }}
+          className="relative rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur-sm p-6 md:p-8 mb-12 shadow-sm"
         >
           <label className="block">
-            <span className="font-hand text-base text-foreground/70">Form title</span>
+            <span className="font-sans text-xs font-medium uppercase tracking-[0.12em] text-foreground/60">Form title</span>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Checkout screener"
-              className="mt-1 w-full bg-background/80 border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-xl font-medium tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-xl font-medium tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors"
               required
             />
           </label>
           <label className="block mt-5">
-            <span className="font-hand text-base text-foreground/70">Description (optional)</span>
+            <span className="font-sans text-xs font-medium uppercase tracking-[0.12em] text-foreground/60">Description (optional)</span>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="What are you trying to learn?"
-              className="mt-1 w-full bg-background/80 border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
             />
           </label>
           {error && (
             <p className="mt-4 font-hand text-base text-destructive">{error}</p>
           )}
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6">
             <button
               type="submit"
               disabled={loading}
@@ -114,9 +113,6 @@ function Dashboard() {
             >
               {loading ? "Saving…" : "Save form"}
             </button>
-            <span className="font-hand text-base text-foreground/60">
-              {forms.length} {forms.length === 1 ? "form" : "forms"} saved
-            </span>
           </div>
         </form>
 
