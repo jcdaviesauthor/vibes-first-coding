@@ -63,26 +63,34 @@
 
 :root {
   --radius: 0.625rem;
-  /* Flowform: warm editorial palette */
-  --background: oklch(0.985 0.008 85);        /* warm off-white */
-  --foreground: oklch(0.18 0.02 50);          /* deep ink */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 50);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 50);
-  --primary: oklch(0.66 0.21 28);             /* electric coral */
-  --primary-foreground: oklch(0.99 0.005 85);
-  --secondary: oklch(0.95 0.015 80);
-  --secondary-foreground: oklch(0.18 0.02 50);
-  --muted: oklch(0.94 0.012 80);
-  --muted-foreground: oklch(0.45 0.015 60);
-  --accent: oklch(0.92 0.04 60);
-  --accent-foreground: oklch(0.18 0.02 50);
+  /* Buddy: IDEO studio + post-it wall */
+  --background: oklch(0.965 0.018 85);        /* warm paper */
+  --foreground: oklch(0.16 0.018 60);         /* deep ink */
+  --card: oklch(0.99 0.01 85);
+  --card-foreground: oklch(0.16 0.018 60);
+  --popover: oklch(0.99 0.01 85);
+  --popover-foreground: oklch(0.16 0.018 60);
+  --primary: oklch(0.16 0.018 60);            /* ink black for buttons */
+  --primary-foreground: oklch(0.97 0.02 90);
+  --secondary: oklch(0.93 0.025 80);
+  --secondary-foreground: oklch(0.16 0.018 60);
+  --muted: oklch(0.92 0.018 80);
+  --muted-foreground: oklch(0.42 0.02 60);
+  --accent: oklch(0.91 0.16 95);              /* post-it yellow */
+  --accent-foreground: oklch(0.16 0.018 60);
+  /* sticky note family */
+  --note-yellow: oklch(0.93 0.16 96);
+  --note-coral: oklch(0.82 0.13 28);
+  --note-sky: oklch(0.86 0.08 230);
+  --note-mint: oklch(0.88 0.09 165);
+  --note-pink: oklch(0.86 0.09 350);
+  --tape: oklch(0.85 0.06 95 / 0.6);
+  --marker: oklch(0.35 0.14 28);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.012 70);
-  --input: oklch(0.9 0.012 70);
-  --ring: oklch(0.66 0.21 28);
+  --border: oklch(0.86 0.018 70);
+  --input: oklch(0.86 0.018 70);
+  --ring: oklch(0.16 0.018 60);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -146,10 +154,13 @@
   }
 
   .font-display {
-    font-family: "Fraunces", ui-serif, Georgia, serif;
+    font-family: "Instrument Serif", "Fraunces", ui-serif, Georgia, serif;
     font-optical-sizing: auto;
-    font-variation-settings: "SOFT" 50, "WONK" 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+  }
+
+  .font-hand {
+    font-family: "Caveat", "Kalam", ui-sans-serif, cursive;
   }
 
   @keyframes float-soft {
@@ -158,9 +169,34 @@
   }
   .animate-float { animation: float-soft 6s ease-in-out infinite; }
 
+  @keyframes wobble {
+    0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(0); }
+    50% { transform: rotate(calc(var(--rot, 0deg) + 0.6deg)) translateY(-4px); }
+  }
+  .animate-wobble { animation: wobble 7s ease-in-out infinite; }
+
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .animate-fade-up { animation: fade-up 0.7s ease-out both; }
+
+  .paper-grain {
+    background-image:
+      radial-gradient(oklch(0.16 0.02 60 / 0.04) 1px, transparent 1px),
+      radial-gradient(oklch(0.16 0.02 60 / 0.03) 1px, transparent 1px);
+    background-size: 14px 14px, 22px 22px;
+    background-position: 0 0, 7px 11px;
+  }
+
+  .note-shadow {
+    box-shadow:
+      0 1px 1px oklch(0.16 0.02 60 / 0.08),
+      0 8px 18px -10px oklch(0.16 0.02 60 / 0.35),
+      0 22px 40px -28px oklch(0.16 0.02 60 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float, .animate-wobble, .animate-fade-up { animation: none !important; }
+  }
 }
