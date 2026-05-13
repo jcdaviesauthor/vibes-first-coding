@@ -89,7 +89,7 @@ function Dashboard() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Checkout screener"
-              className="mt-1 w-full bg-background/70 border border-foreground/15 rounded-[2px] px-3 py-2.5 font-display text-xl text-foreground focus:outline-none focus:border-foreground/60"
+              className="mt-1 w-full bg-background/80 border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-xl font-medium tracking-tight text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors"
               required
             />
           </label>
@@ -100,7 +100,7 @@ function Dashboard() {
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="What are you trying to learn?"
-              className="mt-1 w-full bg-background/70 border border-foreground/15 rounded-[2px] px-3 py-2.5 text-base text-foreground focus:outline-none focus:border-foreground/60"
+              className="mt-1 w-full bg-background/80 border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
             />
           </label>
           {error && (
@@ -110,7 +110,7 @@ function Dashboard() {
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 text-base font-medium hover:-translate-y-0.5 transition-transform disabled:opacity-50"
+              className="inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 font-sans text-base font-medium tracking-tight hover:-translate-y-0.5 transition-transform disabled:opacity-50"
             >
               {loading ? "Saving…" : "Save form"}
             </button>
@@ -121,11 +121,33 @@ function Dashboard() {
         </form>
 
         <section>
-          <h2 className="font-display text-3xl mb-5">Saved forms</h2>
-          {forms.length === 0 ? (
-            <p className="font-hand text-lg text-muted-foreground">
-              Nothing pinned to the wall yet. Save your first form above.
+          <div className="flex items-baseline gap-3 mb-5">
+            <h2 className="font-display text-3xl">Saved forms</h2>
+            <p className="italic text-sm text-muted-foreground">
+              {forms.length} total
             </p>
+          </div>
+          {forms.length === 0 ? (
+            <div className="grid gap-4 md:grid-cols-2">
+              {[
+                { rot: "-1.2deg" },
+                { rot: "1.4deg" },
+                { rot: "-0.8deg" },
+                { rot: "1.1deg" },
+              ].map((p, i) => (
+                <div
+                  key={i}
+                  className="rounded-[3px] border-2 border-dashed border-foreground/20 p-5 h-32 flex items-center justify-center"
+                  style={{ transform: `rotate(${p.rot})` }}
+                >
+                  {i === 0 && (
+                    <p className="font-hand text-base text-foreground/40">
+                      your first form goes here →
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
           ) : (
             <ul className="grid gap-4 md:grid-cols-2">
               {forms.map((f, i) => {
@@ -145,9 +167,9 @@ function Dashboard() {
                     <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">
                       {new Date(f.created_at).toLocaleString()}
                     </p>
-                    <h3 className="font-display text-2xl mt-1 text-foreground">{f.title}</h3>
+                    <h3 className="font-sans text-xl font-semibold tracking-tight mt-1 text-foreground">{f.title}</h3>
                     {f.description && (
-                      <p className="mt-2 text-foreground/80">{f.description}</p>
+                      <p className="mt-2 font-sans text-sm text-foreground/80 leading-relaxed">{f.description}</p>
                     )}
                   </li>
                 );
