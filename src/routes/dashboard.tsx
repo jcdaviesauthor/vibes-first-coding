@@ -89,7 +89,7 @@ function Dashboard() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. research shit."
-              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base font-medium tracking-tight text-foreground placeholder:font-display placeholder:font-normal placeholder:italic placeholder:text-xs placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-lg font-medium tracking-tight text-foreground placeholder:font-display placeholder:font-normal placeholder:italic placeholder:text-sm placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors"
               required
             />
           </label>
@@ -100,7 +100,7 @@ function Dashboard() {
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="What are you trying to learn?"
-              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-sm text-foreground placeholder:font-display placeholder:italic placeholder:text-xs placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:font-display placeholder:italic placeholder:text-sm placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
             />
           </label>
           {error && (
