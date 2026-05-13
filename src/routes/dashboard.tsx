@@ -59,99 +59,120 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground paper-grain">
+    <div className="min-h-screen bg-background text-foreground">
       <Nav />
-      <main className="mx-auto max-w-4xl px-6 py-16">
-        <header className="mb-10">
-          <span
-            className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
-            style={{ background: "var(--note-yellow)" }}
-          >
-            Your research wall
-          </span>
-          <h1 className="font-display mt-5 text-5xl md:text-6xl leading-[1.02]">
-            Dashboard
-          </h1>
-          <p className="mt-3 text-muted-foreground text-lg">
-            Spin up a new form, then watch the wall fill up.
+      <main className="mx-auto max-w-3xl px-6 py-20 md:py-28">
+        {/* Header */}
+        <header className="flex items-end justify-between border-b border-foreground/15 pb-8">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/50">
+              Buddy / Workspace
+            </p>
+            <h1 className="mt-3 text-5xl md:text-6xl font-medium tracking-[-0.04em] leading-[0.95]">
+              Forms
+            </h1>
+          </div>
+          <p className="hidden md:block font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/50">
+            {String(forms.length).padStart(2, "0")} total
           </p>
         </header>
 
-        <form
-          onSubmit={handleSave}
-          className="relative note-shadow rounded-[3px] p-6 md:p-8 mb-12"
-          style={{ background: "var(--note-sky)", transform: "rotate(-0.4deg)" }}
-        >
-          <label className="block">
-            <span className="font-hand text-base text-foreground/70">Form title</span>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Checkout screener"
-              className="mt-1 w-full bg-background/70 border border-foreground/15 rounded-[2px] px-3 py-2.5 font-display text-xl text-foreground focus:outline-none focus:border-foreground/60"
-              required
-            />
-          </label>
-          <label className="block mt-5">
-            <span className="font-hand text-base text-foreground/70">Description (optional)</span>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={3}
-              placeholder="What are you trying to learn?"
-              className="mt-1 w-full bg-background/70 border border-foreground/15 rounded-[2px] px-3 py-2.5 text-base text-foreground focus:outline-none focus:border-foreground/60"
-            />
-          </label>
-          {error && (
-            <p className="mt-4 font-hand text-base text-destructive">{error}</p>
-          )}
-          <div className="mt-6 flex items-center gap-4">
-            <button
-              type="submit"
-              disabled={loading}
-              className="inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 text-base font-medium hover:-translate-y-0.5 transition-transform disabled:opacity-50"
-            >
-              {loading ? "Saving…" : "Save form"}
-            </button>
-            <span className="font-hand text-base text-foreground/60">
-              {forms.length} {forms.length === 1 ? "form" : "forms"} saved
-            </span>
-          </div>
-        </form>
+        {/* New form composer */}
+        <section className="mt-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/50 mb-5">
+            New form
+          </p>
+          <form onSubmit={handleSave} className="space-y-6">
+            <div>
+              <label htmlFor="form-title" className="block text-sm font-medium tracking-tight text-foreground/70">
+                Title
+              </label>
+              <input
+                id="form-title"
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Checkout screener"
+                className="mt-2 w-full bg-transparent border-0 border-b border-foreground/25 px-0 py-3 font-display text-3xl md:text-4xl text-foreground placeholder:text-foreground/25 focus:outline-none focus:border-foreground transition-colors"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="form-desc" className="block text-sm font-medium tracking-tight text-foreground/70">
+                Description <span className="text-foreground/40 font-normal">— optional</span>
+              </label>
+              <textarea
+                id="form-desc"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={2}
+                placeholder="What are you trying to learn?"
+                className="mt-2 w-full bg-transparent border-0 border-b border-foreground/25 px-0 py-3 font-display text-xl text-foreground placeholder:text-foreground/25 focus:outline-none focus:border-foreground transition-colors resize-none"
+              />
+            </div>
+            {error && (
+              <p className="text-sm text-destructive">{error}</p>
+            )}
+            <div className="flex items-center gap-5 pt-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex items-center rounded-full bg-foreground text-background px-7 py-3 text-sm font-medium tracking-tight hover:-translate-y-0.5 transition-transform disabled:opacity-50"
+              >
+                {loading ? "Saving…" : "Save form"}
+              </button>
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/40">
+                Enter to save
+              </span>
+            </div>
+          </form>
+        </section>
 
-        <section>
-          <h2 className="font-display text-3xl mb-5">Saved forms</h2>
-          {forms.length === 0 ? (
-            <p className="font-hand text-lg text-muted-foreground">
-              Nothing pinned to the wall yet. Save your first form above.
+        {/* Saved forms */}
+        <section className="mt-24">
+          <div className="flex items-baseline justify-between border-b border-foreground/15 pb-4 mb-2">
+            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.03em]">
+              Saved forms
+            </h2>
+            <p className="text-xs text-foreground/50 tabular-nums">
+              {forms.length} {forms.length === 1 ? "form" : "forms"} · newest first
             </p>
+          </div>
+
+          {forms.length === 0 ? (
+            <div className="mt-12 border border-dashed border-foreground/20 rounded-sm py-20 px-8 text-center">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/40">
+                Empty wall
+              </p>
+              <p className="mt-4 font-display text-3xl text-foreground/80 leading-snug max-w-md mx-auto">
+                Nothing here yet. The first form you save will land at the top of this list.
+              </p>
+            </div>
           ) : (
-            <ul className="grid gap-4 md:grid-cols-2">
-              {forms.map((f, i) => {
-                const tints = [
-                  "var(--note-yellow)",
-                  "var(--note-coral)",
-                  "var(--note-mint)",
-                  "var(--note-sky)",
-                ];
-                const rot = i % 2 === 0 ? "-1.2deg" : "1.4deg";
-                return (
-                  <li
-                    key={f.id}
-                    className="note-shadow rounded-[3px] p-5"
-                    style={{ background: tints[i % tints.length], transform: `rotate(${rot})` }}
-                  >
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">
-                      {new Date(f.created_at).toLocaleString()}
-                    </p>
-                    <h3 className="font-display text-2xl mt-1 text-foreground">{f.title}</h3>
+            <ul>
+              {forms.map((f) => (
+                <li
+                  key={f.id}
+                  className="group grid grid-cols-[auto_1fr] gap-x-8 py-6 border-b border-foreground/10 hover:bg-foreground/[0.02] transition-colors -mx-2 px-2"
+                >
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/40 pt-2 tabular-nums">
+                    {new Date(f.created_at).toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "2-digit",
+                    })}
+                  </p>
+                  <div className="min-w-0">
+                    <h3 className="text-2xl md:text-[28px] font-medium tracking-[-0.025em] text-foreground leading-tight">
+                      {f.title}
+                    </h3>
                     {f.description && (
-                      <p className="mt-2 text-foreground/80">{f.description}</p>
+                      <p className="mt-2 font-display text-lg text-foreground/65 leading-snug">
+                        {f.description}
+                      </p>
                     )}
-                  </li>
-                );
-              })}
+                  </div>
+                </li>
+              ))}
             </ul>
           )}
         </section>
