@@ -83,7 +83,7 @@ function Dashboard() {
           className="relative rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur-sm p-6 md:p-8 mb-12 shadow-sm"
         >
           <label className="block">
-            <span className="font-sans text-sm font-bold text-foreground">Form title</span>
+            <span className="font-sans text-base font-bold uppercase tracking-[0.12em] text-foreground">Form title</span>
             <input
               type="text"
               value={title}
@@ -94,7 +94,7 @@ function Dashboard() {
             />
           </label>
           <label className="block mt-5">
-            <span className="font-sans text-sm font-bold text-foreground">Description (optional)</span>
+            <span className="font-sans text-base font-bold uppercase tracking-[0.12em] text-foreground">Description (optional)</span>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
