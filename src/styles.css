@@ -163,12 +163,6 @@
     font-family: "Caveat", "Kalam", ui-sans-serif, cursive;
   }
 
-  .font-serif-modern {
-    font-family: "Fraunces", "Instrument Serif", ui-serif, Georgia, serif;
-    font-optical-sizing: auto;
-    letter-spacing: -0.005em;
-  }
-
   @keyframes float-soft {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
