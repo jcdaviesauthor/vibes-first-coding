@@ -115,7 +115,6 @@ export function Hero() {
             color="var(--note-sky)"
             rot="3deg"
             className="absolute top-[180px] right-0 w-72 p-5 animate-wobble"
-            style={{ animationDelay: "1.2s" } as React.CSSProperties}
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">SUS · 4 of 10</p>
             <p className="mt-2 font-display text-lg leading-snug text-foreground">
