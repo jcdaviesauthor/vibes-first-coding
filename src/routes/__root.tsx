@@ -72,21 +72,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Flowform — Forms people actually want to fill out" },
-      { name: "description", content: "Flowform is a beautiful, conversational form builder. Create one-question-at-a-time forms with logic, analytics, and effortless sharing." },
-      { name: "author", content: "Flowform" },
-      { property: "og:title", content: "Flowform — Forms people actually want to fill out" },
-      { property: "og:description", content: "A beautiful, conversational form builder. Build, share, and analyze forms that feel like a conversation." },
+      { title: "Buddy — The research buddy for UXRs" },
+      { name: "description", content: "Buddy is a form tool built for UX researchers. Screeners with quotas, research-native question types, auto-tagged open text, and a panel that remembers." },
+      { name: "author", content: "Buddy" },
+      { property: "og:title", content: "Buddy — The research buddy for UXRs" },
+      { property: "og:description", content: "Surveys that feel like research, not marketing. One tool for screening, fielding, and making sense of what people tell you." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Flowform" },
+      { name: "twitter:site", content: "@buddyresearch" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
       },
       {
         rel: "stylesheet",
