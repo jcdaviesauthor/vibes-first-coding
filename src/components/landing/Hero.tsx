@@ -40,9 +40,9 @@ export function Hero() {
             A form tool for researchers
           </span>
           <h1 className="font-display mt-7 text-5xl md:text-7xl leading-[1.02] text-foreground">
-            Surveys that feel like<br />
-            <span className="relative inline-block">
-              research
+            Rigorous research<br />that feels like
+            <span className="relative inline-block ml-3">
+              recess
               <svg
                 aria-hidden
                 viewBox="0 0 320 18"
@@ -57,8 +57,7 @@ export function Hero() {
                   strokeLinecap="round"
                 />
               </svg>
-            </span>
-            ,<br />not marketing.
+            </span>.
           </h1>
           <p className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed">
             You're cobbling Typeform, Calendly, Airtable, Sheets, and Slack into something that almost works.
