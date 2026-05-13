@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 export function Nav() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/75 border-b border-border/60">
@@ -16,13 +18,14 @@ export function Nav() {
           <a href="#why" className="hover:text-foreground transition-colors">Why Buddy</a>
           <a href="#features" className="hover:text-foreground transition-colors">Features</a>
           <a href="#templates" className="hover:text-foreground transition-colors">Templates</a>
+          <Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
         </nav>
-        <a
-          href="#"
+        <Link
+          to="/dashboard"
           className="inline-flex items-center rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:bg-foreground/90 transition-colors"
         >
           Try the demo
-        </a>
+        </Link>
       </div>
     </header>
   );

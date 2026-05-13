@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const Note = ({
   children,
@@ -64,16 +65,19 @@ export function Hero() {
             Buddy is one tool, built around how research actually happens.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a
-              href="#"
+            <Link
+              to="/dashboard"
               className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-base font-medium hover:-translate-y-0.5 transition-transform"
             >
               Try the demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a href="#features" className="font-hand text-lg text-foreground/80 hover:text-foreground underline-offset-4 hover:underline">
-              See a sample study →
-            </a>
+            </Link>
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center rounded-full border-2 border-foreground/80 text-foreground px-6 py-3 text-base font-medium hover:bg-foreground/5 transition-colors"
+            >
+              Go to dashboard
+            </Link>
           </div>
         </div>
 
