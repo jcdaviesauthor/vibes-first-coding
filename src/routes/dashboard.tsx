@@ -70,10 +70,11 @@ function Dashboard() {
             Your research wall
           </span>
           <h1 className="font-display mt-5 text-5xl md:text-6xl leading-[1.02]">
-            Dashboard
+            The Intel
           </h1>
           <p className="mt-3 text-muted-foreground text-lg">
-            Spin up a new form, then watch the wall fill up.
+            <span className="font-semibold text-foreground">Ask. Collect. Know.</span>{" "}
+            And then watch the insight wall fill up.
           </p>
         </header>
 
@@ -82,24 +83,24 @@ function Dashboard() {
           className="relative rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur-sm p-6 md:p-8 mb-12 shadow-sm"
         >
           <label className="block">
-            <span className="font-sans text-xs font-medium uppercase tracking-[0.12em] text-foreground/60">Form title</span>
+            <span className="font-sans text-sm font-bold text-foreground">Form title</span>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. research shit."
-              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-xl font-medium tracking-tight text-foreground placeholder:font-display placeholder:font-normal placeholder:italic placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base font-medium tracking-tight text-foreground placeholder:font-display placeholder:font-normal placeholder:italic placeholder:text-xs placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors"
               required
             />
           </label>
           <label className="block mt-5">
-            <span className="font-sans text-xs font-medium uppercase tracking-[0.12em] text-foreground/60">Description (optional)</span>
+            <span className="font-sans text-sm font-bold text-foreground">Description (optional)</span>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
               placeholder="What are you trying to learn?"
-              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-base text-foreground placeholder:font-display placeholder:italic placeholder:text-lg placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
+              className="mt-2 w-full bg-transparent border-b border-foreground/20 rounded-none px-1 py-2.5 font-sans text-sm text-foreground placeholder:font-display placeholder:italic placeholder:text-xs placeholder:text-foreground/40 focus:outline-none focus:border-foreground/70 transition-colors resize-none"
             />
           </label>
           {error && (
@@ -109,7 +110,7 @@ function Dashboard() {
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 font-sans text-base font-medium tracking-tight hover:-translate-y-0.5 transition-transform disabled:opacity-50"
+              className="inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 font-sans text-sm font-bold tracking-tight hover:-translate-y-0.5 transition-transform disabled:opacity-50"
             >
               {loading ? "Saving…" : "Save form"}
             </button>
