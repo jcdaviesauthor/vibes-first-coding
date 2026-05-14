@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Nav } from "@/components/landing/Nav";
@@ -21,6 +21,8 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [forms, setForms] = useState<Form[]>([]);
@@ -38,7 +40,17 @@ function Dashboard() {
 
   useEffect(() => {
     loadForms();
+    supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setEmail(session?.user?.email ?? null);
+    });
+    return () => sub.subscription.unsubscribe();
   }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/login" });
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,6 +74,20 @@ function Dashboard() {
     <div className="min-h-screen bg-background text-foreground paper-grain">
       <Nav />
       <main className="mx-auto max-w-4xl px-6 py-16">
+        {email && (
+          <div className="mb-6 flex items-center justify-between gap-3 rounded-full border border-foreground/10 bg-background/60 backdrop-blur-sm px-4 py-2 text-sm">
+            <span className="text-muted-foreground">
+              Signed in as <span className="font-medium text-foreground">{email}</span>
+            </span>
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-foreground hover:underline underline-offset-4"
+            >
+              Sign out
+            </button>
+          </div>
+        )}
         <header className="mb-10">
           <span
             className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
