@@ -73,11 +73,6 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-background text-foreground paper-grain">
       <Nav />
-      {email && (
-        <div className="mx-auto max-w-4xl px-6 pt-3 text-right text-xs text-muted-foreground">
-          signed in: <span className="text-foreground">{email}</span>
-        </div>
-      )}
       <main className="mx-auto max-w-4xl px-6 py-16">
         <header className="mb-10">
           <span
@@ -89,10 +84,11 @@ function Dashboard() {
           <h1 className="font-display mt-5 text-5xl md:text-6xl leading-[1.02]">
             The Intel
           </h1>
-          <p className="mt-3 text-muted-foreground text-lg">
-            <span className="font-semibold text-foreground">Ask. Collect. Know.</span>{" "}
-            And then watch the insight wall fill up.
-          </p>
+          {email && (
+            <p className="mt-3 font-hand text-2xl text-foreground">
+              Welcome {email.split("@")[0].replace(/[._-].*$/, "").replace(/^./, (c) => c.toUpperCase())}, let’s get researching.
+            </p>
+          )}
         </header>
 
         <form
