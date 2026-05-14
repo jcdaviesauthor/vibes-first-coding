@@ -73,21 +73,12 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-background text-foreground paper-grain">
       <Nav />
+      {email && (
+        <div className="mx-auto max-w-4xl px-6 pt-3 text-right text-xs text-muted-foreground">
+          signed in: <span className="text-foreground">{email}</span>
+        </div>
+      )}
       <main className="mx-auto max-w-4xl px-6 py-16">
-        {email && (
-          <div className="mb-6 flex items-center justify-between gap-3 rounded-full border border-foreground/10 bg-background/60 backdrop-blur-sm px-4 py-2 text-sm">
-            <span className="text-muted-foreground">
-              Signed in as <span className="font-medium text-foreground">{email}</span>
-            </span>
-            <button
-              type="button"
-              onClick={handleSignOut}
-              className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-foreground hover:underline underline-offset-4"
-            >
-              Sign out
-            </button>
-          </div>
-        )}
         <header className="mb-10">
           <span
             className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
