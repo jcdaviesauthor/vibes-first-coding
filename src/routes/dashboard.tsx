@@ -125,7 +125,7 @@ function Dashboard() {
           )}
         </header>
 
-        <h2 className="font-sans text-3xl font-bold tracking-tight mb-5 normal-case">Create new form</h2>
+        <h2 className="font-display text-4xl tracking-tight mb-5">Create new form</h2>
         <form
           onSubmit={handleSave}
           className="relative rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur-sm p-6 md:p-8 mb-12 shadow-sm"
