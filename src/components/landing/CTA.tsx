@@ -19,7 +19,7 @@ export function CTA() {
         />
         <div className="relative max-w-2xl">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/60">Finally</p>
-          <h2 className="font-display text-5xl md:text-7xl leading-[1.02] text-foreground mt-3 tracking-tight">
+          <h2 className="font-display text-4xl md:text-5xl leading-[1.05] text-foreground mt-3 tracking-tight">
             Stop wrangling tools.<br />Start doing research.
           </h2>
           <p className="mt-6 text-lg md:text-xl text-foreground/75 max-w-xl leading-relaxed">
