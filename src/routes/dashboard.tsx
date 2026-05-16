@@ -70,6 +70,12 @@ function Dashboard() {
     await loadForms();
   };
 
+  const focusTitle = () => {
+    const el = document.getElementById("form-title-input") as HTMLInputElement | null;
+    el?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => el?.focus(), 300);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground paper-grain">
       <Nav />
@@ -99,6 +105,7 @@ function Dashboard() {
             <span className="font-sans text-base font-bold uppercase tracking-[0.12em] text-foreground">Form title</span>
             <input
               type="text"
+              id="form-title-input"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. research shit."
@@ -138,25 +145,20 @@ function Dashboard() {
             </p>
           </div>
           {forms.length === 0 ? (
-            <div className="grid gap-4 md:grid-cols-2">
-              {[
-                { rot: "-1.2deg" },
-                { rot: "1.4deg" },
-                { rot: "-0.8deg" },
-                { rot: "1.1deg" },
-              ].map((p, i) => (
-                <div
-                  key={i}
-                  className="rounded-[3px] border-2 border-dashed border-foreground/20 p-5 h-32 flex items-center justify-center"
-                  style={{ transform: `rotate(${p.rot})` }}
-                >
-                  {i === 0 && (
-                    <p className="font-hand text-base text-foreground/40">
-                      your first form goes here →
-                    </p>
-                  )}
-                </div>
-              ))}
+            <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-10 md:p-14 text-center">
+              <p className="font-hand text-2xl text-foreground">
+                Your wall’s empty. Let’s pin something up.
+              </p>
+              <p className="mt-2 font-sans text-sm text-muted-foreground">
+                You haven’t created any forms yet — start with one question, see what people say.
+              </p>
+              <button
+                type="button"
+                onClick={focusTitle}
+                className="mt-6 inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 font-sans text-sm font-bold tracking-tight hover:-translate-y-0.5 transition-transform"
+              >
+                Create your first form
+              </button>
             </div>
           ) : (
             <ul className="grid gap-4 md:grid-cols-2">
