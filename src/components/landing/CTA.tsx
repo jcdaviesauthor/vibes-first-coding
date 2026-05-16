@@ -18,22 +18,22 @@ export function CTA() {
           style={{ background: "var(--tape)" }}
         />
         <div className="relative max-w-2xl">
-          <p className="font-hand text-lg text-foreground/70">finally,</p>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.02] text-foreground mt-2">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/60">Finally</p>
+          <h2 className="font-display text-5xl md:text-7xl leading-[1.02] text-foreground mt-3 tracking-tight">
             Stop wrangling tools.<br />Start doing research.
           </h2>
-          <p className="mt-5 text-lg text-foreground/75 max-w-xl">
+          <p className="mt-6 text-lg md:text-xl text-foreground/75 max-w-xl leading-relaxed">
             Try the live demo. Build a screener in five minutes. Send it to ten people by lunch.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#"
-              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-3.5 text-base font-semibold hover:-translate-y-0.5 transition-transform"
+              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-3 font-sans text-sm font-semibold tracking-tight hover:-translate-y-0.5 transition-transform"
             >
               Try the demo
               <ArrowRight className="h-4 w-4" />
             </a>
-            <p className="font-hand text-base text-foreground/70">no signup, no credit card.</p>
+            <p className="font-sans text-sm text-foreground/70">No signup, no credit card.</p>
           </div>
         </div>
       </div>
