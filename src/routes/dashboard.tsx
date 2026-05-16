@@ -100,7 +100,7 @@ function Dashboard() {
         <header className="mb-10">
           <div className="flex items-start justify-between gap-4">
             <span
-              className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-xl text-foreground"
+              className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-2xl text-foreground"
               style={{ background: "var(--note-yellow)" }}
             >
               Your research wall
