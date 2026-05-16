@@ -1,6 +1,18 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export function Nav() {
+  const [isAuthed, setIsAuthed] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setIsAuthed(!!data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setIsAuthed(!!session);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/75 border-b border-border/60">
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
@@ -18,21 +30,34 @@ export function Nav() {
           <a href="#why" className="hover:text-foreground transition-colors">Why Buddy</a>
           <a href="#features" className="hover:text-foreground transition-colors">Features</a>
           <a href="#templates" className="hover:text-foreground transition-colors">Templates</a>
-          <Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
+          {isAuthed && (
+            <Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
+          )}
         </nav>
         <div className="flex items-center gap-3">
-          <Link
-            to="/login"
-            className="hidden sm:inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Sign in
-          </Link>
-          <Link
-            to="/signup"
-            className="inline-flex items-center rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:bg-foreground/90 transition-colors"
-          >
-            Sign up
-          </Link>
+          {isAuthed ? (
+            <Link
+              to="/dashboard"
+              className="inline-flex items-center rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:bg-foreground/90 transition-colors"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="hidden sm:inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/signup"
+                className="inline-flex items-center rounded-full bg-foreground text-background px-4 py-2 text-sm font-medium hover:bg-foreground/90 transition-colors"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>
