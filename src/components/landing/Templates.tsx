@@ -17,7 +17,7 @@ export function Templates() {
               Templates a researcher would actually pick.
             </h2>
           </div>
-          <p className="font-hand text-xl text-foreground/70 max-w-xs">
+          <p className="font-hand text-2xl text-foreground/70 max-w-xs">
             no "blank form" or "contact form" in sight.
           </p>
         </div>
@@ -33,7 +33,7 @@ export function Templates() {
                 <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/55">Template</p>
                 <p className="font-display mt-2 text-2xl leading-tight text-foreground">{t.name}</p>
               </div>
-              <p className="font-hand text-base text-foreground/70">{t.meta}</p>
+              <p className="font-sans text-xs font-medium uppercase tracking-wider text-foreground/60">{t.meta}</p>
             </div>
           ))}
         </div>
