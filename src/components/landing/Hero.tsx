@@ -41,24 +41,7 @@ export function Hero() {
             A form tool for researchers
           </span>
           <h1 className="font-display mt-8 text-5xl md:text-6xl leading-[1.05] text-foreground tracking-tight">
-            Rigorous research<br />that feels like
-            <span className="relative inline-block ml-3">
-              recess
-              <svg
-                aria-hidden
-                viewBox="0 0 320 18"
-                className="absolute left-0 -bottom-2 w-full h-3"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M3 12 C 80 4, 160 16, 317 6"
-                  fill="none"
-                  stroke="var(--marker)"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>.
+            Research that<br />actually flows.
           </h1>
           <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             You're cobbling Typeform, Calendly, Airtable, Sheets, and Slack into something that almost works.
