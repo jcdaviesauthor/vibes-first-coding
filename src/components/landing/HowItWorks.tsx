@@ -23,7 +23,7 @@ export function HowItWorks() {
                 style={{ background: s.color, transform: `rotate(${s.rot})` }}
               >
                 <p className="font-mono text-[11px] text-foreground/60">{s.n}</p>
-                <h3 className="font-display mt-2 text-3xl text-foreground">{s.title}</h3>
+                <h3 className="font-display mt-2 text-2xl text-foreground">{s.title}</h3>
                 <p className="mt-2 text-sm text-foreground/75 leading-relaxed">{s.desc}</p>
               </div>
               {i < steps.length - 1 && (
