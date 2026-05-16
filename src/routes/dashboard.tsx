@@ -39,10 +39,20 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    loadForms();
-    supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? null));
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        navigate({ to: "/login" });
+        return;
+      }
+      setEmail(data.session.user.email ?? null);
+      loadForms();
+    });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      setEmail(session?.user?.email ?? null);
+      if (!session) {
+        navigate({ to: "/login" });
+        return;
+      }
+      setEmail(session.user.email ?? null);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
