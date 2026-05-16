@@ -120,7 +120,10 @@ function Dashboard() {
           </h1>
           {email && (
             <p className="mt-4 font-display text-2xl md:text-3xl tracking-tight text-foreground/80">
-              Welcome {email.split("@")[0].replace(/[._-].*$/, "").replace(/^./, (c) => c.toUpperCase())}, let’s get researching.
+              <span className="font-bold text-foreground">
+                Welcome {email.split("@")[0].replace(/[._-].*$/, "").replace(/^./, (c) => c.toUpperCase())}
+              </span>
+              , let’s get researching.
             </p>
           )}
         </header>
