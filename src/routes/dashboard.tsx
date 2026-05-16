@@ -119,13 +119,13 @@ function Dashboard() {
             The Intel
           </h1>
           {email && (
-            <p className="mt-4 font-sans text-lg text-muted-foreground">
+            <p className="mt-4 font-sans text-2xl md:text-3xl text-foreground/80">
               Welcome {email.split("@")[0].replace(/[._-].*$/, "").replace(/^./, (c) => c.toUpperCase())}, let’s get researching.
             </p>
           )}
         </header>
 
-        <h2 className="font-display text-4xl tracking-tight mb-5">Create new form</h2>
+        <h2 className="font-sans text-3xl font-bold tracking-tight mb-5 normal-case">Create new form</h2>
         <form
           onSubmit={handleSave}
           className="relative rounded-2xl border border-foreground/10 bg-background/60 backdrop-blur-sm p-6 md:p-8 mb-12 shadow-sm"
