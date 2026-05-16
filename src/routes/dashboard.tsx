@@ -57,9 +57,16 @@ function Dashboard() {
     if (!title.trim()) return;
     setLoading(true);
     setError(null);
+    const { data: userData } = await supabase.auth.getUser();
+    const uid = userData.user?.id;
+    if (!uid) {
+      setLoading(false);
+      setError("You must be signed in to save a form.");
+      return;
+    }
     const { error } = await supabase
       .from("forms")
-      .insert({ title: title.trim(), description: description.trim() || null });
+      .insert({ title: title.trim(), description: description.trim() || null, user_id: uid });
     setLoading(false);
     if (error) {
       setError(error.message);
