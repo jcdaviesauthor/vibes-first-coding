@@ -33,7 +33,7 @@ export function ToolPile() {
             </span>
           ))}
           <span
-            className="inline-flex items-center note-shadow px-4 py-2 font-hand text-xl text-foreground"
+            className="inline-flex items-center note-shadow px-4 py-2 font-hand text-2xl text-foreground"
             style={{ background: "var(--note-yellow)", transform: "rotate(-3deg)" }}
           >
             → just Buddy
