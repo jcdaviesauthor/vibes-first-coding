@@ -9,7 +9,7 @@ const templates = [
 export function Templates() {
   return (
     <section id="templates" className="paper-grain border-y border-border/60">
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="flex items-end justify-between flex-wrap gap-6">
           <div className="max-w-xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Starting points</p>
