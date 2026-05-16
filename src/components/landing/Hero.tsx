@@ -40,7 +40,7 @@ export function Hero() {
           >
             A form tool for researchers
           </span>
-          <h1 className="font-display mt-8 text-6xl md:text-8xl leading-[1.02] text-foreground tracking-tight">
+          <h1 className="font-display mt-8 text-5xl md:text-6xl leading-[1.05] text-foreground tracking-tight">
             Rigorous research<br />that feels like
             <span className="relative inline-block ml-3">
               recess
