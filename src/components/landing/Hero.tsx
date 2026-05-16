@@ -35,12 +35,12 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         <div className="lg:col-span-7 animate-fade-up">
           <span
-            className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
+            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-xl text-foreground"
             style={{ background: "var(--note-yellow)" }}
           >
             A form tool for researchers
           </span>
-          <h1 className="font-display mt-7 text-5xl md:text-7xl leading-[1.02] text-foreground">
+          <h1 className="font-display mt-8 text-6xl md:text-8xl leading-[1.02] text-foreground tracking-tight">
             Rigorous research<br />that feels like
             <span className="relative inline-block ml-3">
               recess
@@ -60,21 +60,21 @@ export function Hero() {
               </svg>
             </span>.
           </h1>
-          <p className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed">
+          <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             You're cobbling Typeform, Calendly, Airtable, Sheets, and Slack into something that almost works.
             Buddy is one tool, built around how research actually happens.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
               to="/dashboard"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-base font-medium hover:-translate-y-0.5 transition-transform"
+              className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-3 font-sans text-sm font-semibold tracking-tight hover:-translate-y-0.5 transition-transform"
             >
               Try the demo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
               to="/dashboard"
-              className="inline-flex items-center rounded-full border-2 border-foreground/80 text-foreground px-6 py-3 text-base font-medium hover:bg-foreground/5 transition-colors"
+              className="inline-flex items-center rounded-full border border-foreground/80 bg-background text-foreground px-7 py-3 font-sans text-sm font-semibold tracking-tight hover:bg-foreground/5 transition-colors"
             >
               Go to dashboard
             </Link>
@@ -93,7 +93,7 @@ export function Hero() {
             <p className="mt-2 font-display text-xl leading-snug text-foreground">
               Which phone do you use most days?
             </p>
-            <ul className="mt-3 space-y-1.5 font-hand text-base text-foreground/80">
+            <ul className="mt-3 space-y-1.5 font-sans text-sm text-foreground/80">
               <li>○ iPhone</li>
               <li className="text-foreground">● Android</li>
               <li>○ Both / switch</li>
@@ -107,10 +107,10 @@ export function Hero() {
             className="absolute top-0 right-2 w-44 p-4"
             tape
           >
-            <p className="font-hand text-sm text-foreground/70">Quota</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Quota</p>
             <p className="font-display text-2xl text-foreground">iPhone 7/10</p>
             <p className="font-display text-2xl text-foreground">Android 3/10</p>
-            <p className="mt-2 font-hand text-sm text-foreground/60">closing soon ✓</p>
+            <p className="mt-2 font-sans text-xs text-foreground/60">closing soon ✓</p>
           </Note>
 
           {/* SUS scale */}
@@ -152,7 +152,7 @@ export function Hero() {
               {["confusing checkout (3)", "trust", "drop-off"].map((t) => (
                 <span
                   key={t}
-                  className="font-hand text-sm bg-background/60 text-foreground px-2 py-0.5 rounded-full"
+                  className="font-sans text-xs font-medium bg-background/60 text-foreground px-2.5 py-0.5 rounded-full"
                 >
                   {t}
                 </span>

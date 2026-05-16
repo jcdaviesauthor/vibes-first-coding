@@ -100,7 +100,7 @@ function Dashboard() {
         <header className="mb-10">
           <div className="flex items-start justify-between gap-4">
             <span
-              className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
+              className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-xl text-foreground"
               style={{ background: "var(--note-yellow)" }}
             >
               Your research wall
@@ -115,11 +115,11 @@ function Dashboard() {
               </button>
             )}
           </div>
-          <h1 className="font-display mt-5 text-5xl md:text-6xl leading-[1.02]">
+          <h1 className="font-display mt-6 text-6xl md:text-7xl leading-[1.02] tracking-tight">
             The Intel
           </h1>
           {email && (
-            <p className="mt-3 font-hand text-2xl text-foreground">
+            <p className="mt-4 font-sans text-lg text-muted-foreground">
               Welcome {email.split("@")[0].replace(/[._-].*$/, "").replace(/^./, (c) => c.toUpperCase())}, let’s get researching.
             </p>
           )}
@@ -152,7 +152,7 @@ function Dashboard() {
             />
           </label>
           {error && (
-            <p className="mt-4 font-hand text-base text-destructive">{error}</p>
+            <p className="mt-4 font-sans text-sm font-medium text-destructive">{error}</p>
           )}
           <div className="mt-6">
             <button
@@ -174,7 +174,7 @@ function Dashboard() {
           </div>
           {forms.length === 0 ? (
             <div className="rounded-2xl border-2 border-dashed border-foreground/20 p-10 md:p-14 text-center">
-              <p className="font-hand text-2xl text-foreground">
+              <p className="font-display text-3xl text-foreground tracking-tight">
                 Your wall’s empty. Let’s pin something up.
               </p>
               <p className="mt-2 font-sans text-sm text-muted-foreground">

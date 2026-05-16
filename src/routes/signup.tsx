@@ -56,12 +56,12 @@ function SignupPage() {
       <main className="mx-auto max-w-md px-6 py-16">
         <header className="mb-8">
           <span
-            className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
+            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-xl text-foreground"
             style={{ background: "var(--note-yellow)" }}
           >
             Welcome to the wall
           </span>
-          <h1 className="font-display mt-5 text-5xl leading-[1.02]">Sign up</h1>
+          <h1 className="font-display mt-6 text-6xl leading-[1.02] tracking-tight">Sign up</h1>
           <p className="mt-3 text-muted-foreground text-base">
             Create an account to start pinning forms.
           </p>
@@ -113,7 +113,7 @@ function SignupPage() {
             </div>
           </label>
           {error && (
-            <p className="mt-4 font-hand text-base text-destructive">{error}</p>
+            <p className="mt-4 font-sans text-sm font-medium text-destructive">{error}</p>
           )}
           <button
             type="submit"

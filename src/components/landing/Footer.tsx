@@ -5,7 +5,7 @@ export function Footer() {
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
             <span
-              className="inline-flex h-7 w-7 items-center justify-center rounded-[3px] -rotate-6 note-shadow font-hand text-[15px] font-bold text-foreground"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-[3px] -rotate-6 note-shadow font-hand text-[20px] font-bold text-foreground"
               style={{ background: "var(--note-yellow)" }}
               aria-hidden
             >
@@ -37,7 +37,7 @@ export function Footer() {
       <div className="border-t border-border/60">
         <div className="mx-auto max-w-7xl px-6 py-5 text-xs text-muted-foreground flex justify-between">
           <span>© {new Date().getFullYear()} Buddy</span>
-          <span className="font-hand text-sm">made for researchers, by researchers.</span>
+          <span className="font-sans text-xs">Made for researchers, by researchers.</span>
         </div>
       </div>
     </footer>
