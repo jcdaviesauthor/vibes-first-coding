@@ -81,12 +81,23 @@ function Dashboard() {
       <Nav />
       <main className="mx-auto max-w-4xl px-6 py-16">
         <header className="mb-10">
-          <span
-            className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
-            style={{ background: "var(--note-yellow)" }}
-          >
-            Your research wall
-          </span>
+          <div className="flex items-start justify-between gap-4">
+            <span
+              className="inline-block note-shadow px-3 py-1.5 -rotate-2 font-hand text-base text-foreground"
+              style={{ background: "var(--note-yellow)" }}
+            >
+              Your research wall
+            </span>
+            {email && (
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="shrink-0 rounded-full border border-foreground/20 px-4 py-2 font-sans text-xs font-bold uppercase tracking-[0.12em] text-foreground hover:bg-foreground hover:text-background transition-colors"
+              >
+                Sign out
+              </button>
+            )}
+          </div>
           <h1 className="font-display mt-5 text-5xl md:text-6xl leading-[1.02]">
             The Intel
           </h1>
