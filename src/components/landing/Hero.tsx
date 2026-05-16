@@ -35,7 +35,7 @@ export function Hero() {
       <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         <div className="lg:col-span-7 animate-fade-up">
           <span
-            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-xl text-foreground"
+            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-2xl text-foreground"
             style={{ background: "var(--note-yellow)" }}
           >
             A form tool for researchers

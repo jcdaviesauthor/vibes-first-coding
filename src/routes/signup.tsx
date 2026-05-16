@@ -56,7 +56,7 @@ function SignupPage() {
       <main className="mx-auto max-w-md px-6 py-16">
         <header className="mb-8">
           <span
-            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-xl text-foreground"
+            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-2xl text-foreground"
             style={{ background: "var(--note-yellow)" }}
           >
             Welcome to the wall
