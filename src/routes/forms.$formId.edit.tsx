@@ -242,7 +242,7 @@ function EditForm() {
               <div className="mt-6 flex items-center gap-3">
                 <button
                   onClick={saveChanges}
-                  disabled={saving || !dirty}
+                  disabled={saving}
                   className={`rounded-full px-6 py-3 font-sans text-sm font-bold uppercase tracking-[0.12em] transition-colors ${
                     justSaved || !dirty
                       ? "border border-foreground/20 hover:bg-foreground hover:text-background"
