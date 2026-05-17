@@ -65,105 +65,105 @@ export function Hero() {
         </div>
 
         {/* Sticky-note collage */}
-        <div className="mt-20 relative h-[340px] md:h-[300px] animate-fade-up" style={{ animationDelay: "120ms" }}>
-          {/* Screener question */}
-          <Note
-            color="var(--note-yellow)"
-            rot="-4deg"
-            className="absolute top-2 left-0 w-60 p-5 animate-wobble"
-          >
-            <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">Screener · Q2</p>
-            <p className="mt-2 font-display text-xl leading-snug text-foreground">
-              Which phone do you use most days?
-            </p>
-            <ul className="mt-3 space-y-1.5 font-sans text-sm text-foreground/80">
-              <li>○ iPhone</li>
-              <li className="text-foreground">● Android</li>
-              <li>○ Both / switch</li>
-            </ul>
-          </Note>
+        <div className="mt-20 -mx-6 px-6 overflow-x-auto animate-fade-up" style={{ animationDelay: "120ms" }}>
+          <div className="flex items-start gap-5 min-w-max py-6">
+            {/* Screener question */}
+            <Note color="var(--note-yellow)" rot="-4deg" className="shrink-0 w-60 p-5 animate-wobble">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">Screener · Q2</p>
+              <p className="mt-2 font-display text-xl leading-snug text-foreground">
+                Which phone do you use most days?
+              </p>
+              <ul className="mt-3 space-y-1.5 font-sans text-sm text-foreground/80">
+                <li>○ iPhone</li>
+                <li className="text-foreground">● Android</li>
+                <li>○ Both / switch</li>
+              </ul>
+            </Note>
 
-          {/* Quota chip */}
-          <Note
-            color="var(--note-mint)"
-            rot="5deg"
-            className="absolute top-6 left-[26%] w-44 p-4"
-            tape
-          >
-            <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Quota</p>
-            <p className="font-display text-2xl text-foreground">iPhone 7/10</p>
-            <p className="font-display text-2xl text-foreground">Android 3/10</p>
-            <p className="mt-2 font-sans text-xs text-foreground/60">closing soon ✓</p>
-          </Note>
+            {/* Quota chip */}
+            <Note color="var(--note-mint)" rot="5deg" className="shrink-0 w-44 p-4 mt-8" tape>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Quota</p>
+              <p className="font-display text-2xl text-foreground">iPhone 7/10</p>
+              <p className="font-display text-2xl text-foreground">Android 3/10</p>
+              <p className="mt-2 font-sans text-xs text-foreground/60">closing soon ✓</p>
+            </Note>
 
-          {/* SUS scale */}
-          <Note
-            color="var(--note-sky)"
-            rot="3deg"
-            className="absolute top-0 left-[46%] w-64 p-5 animate-wobble"
-          >
-            <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">SUS · 4 of 10</p>
-            <p className="mt-2 font-display text-lg leading-snug text-foreground">
-              I found the system unnecessarily complex.
-            </p>
-            <div className="mt-4 flex gap-1.5">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <span
-                  key={n}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full font-mono text-xs ${
-                    n === 2
-                      ? "bg-foreground text-background"
-                      : "border border-foreground/30 text-foreground/70"
-                  }`}
-                >
-                  {n}
-                </span>
-              ))}
-            </div>
-          </Note>
+            {/* SUS scale */}
+            <Note color="var(--note-sky)" rot="-2deg" className="shrink-0 w-64 p-5 animate-wobble">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">SUS · 4 of 10</p>
+              <p className="mt-2 font-display text-lg leading-snug text-foreground">
+                I found the system unnecessarily complex.
+              </p>
+              <div className="mt-4 flex gap-1.5">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <span
+                    key={n}
+                    className={`flex h-8 w-8 items-center justify-center rounded-full font-mono text-xs ${
+                      n === 2
+                        ? "bg-foreground text-background"
+                        : "border border-foreground/30 text-foreground/70"
+                    }`}
+                  >
+                    {n}
+                  </span>
+                ))}
+              </div>
+            </Note>
 
-          {/* Tagged quote */}
-          <Note
-            color="var(--note-coral)"
-            rot="-6deg"
-            className="absolute top-8 right-0 w-64 p-5"
-          >
-            <p className="font-display text-lg italic text-foreground leading-snug">
-              "...and then I just gave up at the checkout."
-            </p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {["confusing checkout (3)", "trust", "drop-off"].map((t) => (
-                <span
-                  key={t}
-                  className="font-sans text-xs font-medium bg-background/60 text-foreground px-2.5 py-0.5 rounded-full"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </Note>
+            {/* Tagged quote */}
+            <Note color="var(--note-coral)" rot="4deg" className="shrink-0 w-64 p-5 mt-6">
+              <p className="font-display text-lg italic text-foreground leading-snug">
+                "...and then I just gave up at the checkout."
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {["confusing checkout (3)", "trust", "drop-off"].map((t) => (
+                  <span
+                    key={t}
+                    className="font-sans text-xs font-medium bg-background/60 text-foreground px-2.5 py-0.5 rounded-full"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </Note>
 
-          {/* Hand arrow */}
-          <svg
-            aria-hidden
-            className="absolute top-[120px] left-[22%] w-24 h-16 hidden md:block"
-            viewBox="0 0 140 90"
-          >
-            <path
-              d="M10 20 C 40 10, 80 60, 120 50"
-              fill="none"
-              stroke="var(--marker)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-            <path
-              d="M120 50 L 110 42 M 120 50 L 113 60"
-              fill="none"
-              stroke="var(--marker)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-          </svg>
+            {/* NPS */}
+            <Note color="var(--note-pink)" rot="-3deg" className="shrink-0 w-56 p-5 animate-wobble">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">NPS</p>
+              <p className="mt-2 font-display text-lg leading-snug text-foreground">
+                How likely to recommend?
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1">
+                {[0,1,2,3,4,5,6,7,8,9,10].map((n) => (
+                  <span
+                    key={n}
+                    className={`flex h-6 w-6 items-center justify-center rounded-full font-mono text-[10px] ${
+                      n === 9
+                        ? "bg-foreground text-background"
+                        : "border border-foreground/30 text-foreground/70"
+                    }`}
+                  >
+                    {n}
+                  </span>
+                ))}
+              </div>
+            </Note>
+
+            {/* Participant card */}
+            <Note color="var(--note-yellow)" rot="3deg" className="shrink-0 w-52 p-4 mt-10" tape>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Participant</p>
+              <p className="mt-1 font-display text-xl text-foreground">Jessica M.</p>
+              <p className="font-sans text-xs text-foreground/60">Study #4 · Android user</p>
+              <p className="mt-2 font-hand text-base text-foreground/80">"loved the new flow!"</p>
+            </Note>
+
+            {/* Theme tag */}
+            <Note color="var(--note-mint)" rot="-5deg" className="shrink-0 w-48 p-4">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Theme</p>
+              <p className="mt-2 font-display text-2xl leading-tight text-foreground">trust signals</p>
+              <p className="mt-2 font-sans text-xs text-foreground/60">7 mentions · rising</p>
+            </Note>
+          </div>
         </div>
       </div>
     </section>
