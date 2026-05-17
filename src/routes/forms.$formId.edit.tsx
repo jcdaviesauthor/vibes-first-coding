@@ -160,6 +160,13 @@ function EditForm() {
             {form?.description && <p className="mt-2 font-sans text-sm text-foreground/70 max-w-2xl">{form.description}</p>}
           </div>
           <div className="flex gap-2">
+            <Link
+              to="/forms/$formId/responses"
+              params={{ formId: form!.id }}
+              className="rounded-full border border-foreground/20 px-4 py-2 font-sans text-xs font-bold uppercase tracking-[0.12em] hover:bg-foreground hover:text-background transition-colors"
+            >
+              Responses
+            </Link>
             <button
               onClick={() => setPreview((p) => !p)}
               className="rounded-full border border-foreground/20 px-4 py-2 font-sans text-xs font-bold uppercase tracking-[0.12em] hover:bg-foreground hover:text-background transition-colors"
