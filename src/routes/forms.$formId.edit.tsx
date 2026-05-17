@@ -244,8 +244,8 @@ function EditForm() {
                   onClick={saveChanges}
                   disabled={saving || !dirty}
                   className={`rounded-full px-6 py-3 font-sans text-sm font-bold uppercase tracking-[0.12em] transition-colors ${
-                    justSaved
-                      ? "bg-green-600 text-white"
+                    justSaved || !dirty
+                      ? "border border-foreground/20 hover:bg-foreground hover:text-background"
                       : "bg-foreground text-background hover:bg-foreground/90 disabled:opacity-40"
                   }`}
                 >
