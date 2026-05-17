@@ -81,7 +81,7 @@ export function Hero() {
             </Note>
 
             {/* Quota chip */}
-            <Note color="var(--note-mint)" rot="5deg" className="shrink-0 w-44 p-4 mt-8" tape>
+            <Note color="var(--note-mint)" rot="5deg" className="shrink-0 w-44 p-4 mt-12 -ml-8" tape>
               <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Quota</p>
               <p className="font-display text-2xl text-foreground">iPhone 7/10</p>
               <p className="font-display text-2xl text-foreground">Android 3/10</p>
@@ -89,7 +89,7 @@ export function Hero() {
             </Note>
 
             {/* SUS scale */}
-            <Note color="var(--note-sky)" rot="-2deg" className="shrink-0 w-64 p-5 animate-wobble">
+            <Note color="var(--note-sky)" rot="-2deg" className="shrink-0 w-64 p-5 animate-wobble -ml-4 mt-2">
               <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">SUS · 4 of 10</p>
               <p className="mt-2 font-display text-lg leading-snug text-foreground">
                 I found the system unnecessarily complex.
@@ -111,7 +111,7 @@ export function Hero() {
             </Note>
 
             {/* Tagged quote */}
-            <Note color="var(--note-coral)" rot="4deg" className="shrink-0 w-64 p-5 mt-6">
+            <Note color="var(--note-coral)" rot="4deg" className="shrink-0 w-64 p-5 mt-10 -ml-6">
               <p className="font-display text-lg italic text-foreground leading-snug">
                 "...and then I just gave up at the checkout."
               </p>
@@ -128,7 +128,7 @@ export function Hero() {
             </Note>
 
             {/* NPS */}
-            <Note color="var(--note-pink)" rot="-3deg" className="shrink-0 w-56 p-5 animate-wobble">
+            <Note color="var(--note-pink)" rot="-3deg" className="shrink-0 w-56 p-5 animate-wobble mt-1">
               <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">NPS</p>
               <p className="mt-2 font-display text-lg leading-snug text-foreground">
                 How likely to recommend?
@@ -150,7 +150,7 @@ export function Hero() {
             </Note>
 
             {/* Participant card */}
-            <Note color="var(--note-yellow)" rot="3deg" className="shrink-0 w-52 p-4 mt-10" tape>
+            <Note color="var(--note-yellow)" rot="3deg" className="shrink-0 w-52 p-4 mt-14 -ml-10" tape>
               <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Participant</p>
               <p className="mt-1 font-display text-xl text-foreground">Jessica M.</p>
               <p className="font-sans text-xs text-foreground/60">Study #4 · Android user</p>
@@ -158,7 +158,7 @@ export function Hero() {
             </Note>
 
             {/* Theme tag */}
-            <Note color="var(--note-mint)" rot="-5deg" className="shrink-0 w-48 p-4">
+            <Note color="var(--note-mint)" rot="-5deg" className="shrink-0 w-48 p-4 mt-4 -ml-6">
               <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Theme</p>
               <p className="mt-2 font-display text-2xl leading-tight text-foreground">trust signals</p>
               <p className="mt-2 font-sans text-xs text-foreground/60">7 mentions · rising</p>
