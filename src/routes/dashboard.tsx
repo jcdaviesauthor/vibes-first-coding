@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Nav } from "@/components/landing/Nav";
@@ -202,16 +202,19 @@ function Dashboard() {
                 return (
                   <li
                     key={f.id}
-                    className="note-shadow rounded-[3px] p-5"
+                    className="note-shadow rounded-[3px] p-5 transition-transform hover:-translate-y-1"
                     style={{ background: tints[i % tints.length], transform: `rotate(${rot})` }}
                   >
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">
-                      {new Date(f.created_at).toLocaleString()}
-                    </p>
-                    <h3 className="font-sans text-xl font-semibold tracking-tight mt-1 text-foreground">{f.title}</h3>
-                    {f.description && (
-                      <p className="mt-2 font-sans text-sm text-foreground/80 leading-relaxed">{f.description}</p>
-                    )}
+                    <Link to="/forms/$formId/edit" params={{ formId: f.id }} className="block">
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">
+                        {new Date(f.created_at).toLocaleString()}
+                      </p>
+                      <h3 className="font-sans text-xl font-semibold tracking-tight mt-1 text-foreground">{f.title}</h3>
+                      {f.description && (
+                        <p className="mt-2 font-sans text-sm text-foreground/80 leading-relaxed">{f.description}</p>
+                      )}
+                      <p className="mt-3 font-sans text-xs font-bold uppercase tracking-[0.12em] text-foreground/60">Edit questions →</p>
+                    </Link>
                   </li>
                 );
               })}
