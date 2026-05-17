@@ -70,8 +70,8 @@ function FillForm() {
     return (
       <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-6">
         <div className="max-w-md text-center">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/40">Thank you</p>
-          <h1 className="mt-3 font-display text-5xl tracking-tight">Response saved.</h1>
+          <h1 className="font-display text-6xl md:text-7xl tracking-tight">Thank you</h1>
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-foreground/40">Response saved</p>
           <p className="mt-3 font-sans text-sm text-foreground/70">Thanks for filling out “{form.title}”. You can close this tab.</p>
         </div>
       </main>
