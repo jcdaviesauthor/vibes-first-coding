@@ -31,10 +31,11 @@ function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const loadForms = async () => {
+  const loadForms = async (userId: string) => {
     const { data, error } = await supabase
       .from("forms")
       .select("*")
+      .eq("user_id", userId)
       .order("created_at", { ascending: false });
     if (error) setError(error.message);
     else {
@@ -78,7 +79,7 @@ function Dashboard() {
         return;
       }
       setEmail(data.session.user.email ?? null);
-      loadForms();
+      loadForms(data.session.user.id);
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       if (!session) {
@@ -86,6 +87,7 @@ function Dashboard() {
         return;
       }
       setEmail(session.user.email ?? null);
+      loadForms(session.user.id);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
@@ -117,7 +119,7 @@ function Dashboard() {
     }
     setTitle("");
     setDescription("");
-    await loadForms();
+    await loadForms(uid);
   };
 
   const focusTitle = () => {
