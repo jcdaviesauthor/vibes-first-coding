@@ -30,6 +30,9 @@ function EditForm() {
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
 
   useEffect(() => {
     (async () => {
