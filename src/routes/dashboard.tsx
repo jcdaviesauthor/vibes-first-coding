@@ -213,8 +213,11 @@ function Dashboard() {
                       {f.description && (
                         <p className="mt-2 font-sans text-sm text-foreground/80 leading-relaxed">{f.description}</p>
                       )}
-                      <p className="mt-3 font-sans text-xs font-bold uppercase tracking-[0.12em] text-foreground/60">Edit questions →</p>
                     </Link>
+                    <div className="mt-3 flex gap-3 font-sans text-xs font-bold uppercase tracking-[0.12em]">
+                      <Link to="/forms/$formId/edit" params={{ formId: f.id }} className="text-foreground/60 hover:text-foreground">Edit →</Link>
+                      <Link to="/forms/$formId/responses" params={{ formId: f.id }} className="text-foreground/60 hover:text-foreground">View responses →</Link>
+                    </div>
                   </li>
                 );
               })}
