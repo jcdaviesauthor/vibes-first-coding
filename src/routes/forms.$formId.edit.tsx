@@ -237,6 +237,25 @@ function EditForm() {
                 <button onClick={() => addQuestion("rating")} className="rounded-full border border-foreground/20 px-4 py-2 font-sans text-sm hover:bg-foreground hover:text-background transition-colors">+ Rating</button>
               </div>
             </section>
+
+            {questions.length > 0 && (
+              <div className="mt-6 flex items-center gap-3">
+                <button
+                  onClick={saveChanges}
+                  disabled={saving || !dirty}
+                  className={`rounded-full px-6 py-3 font-sans text-sm font-bold uppercase tracking-[0.12em] transition-colors ${
+                    justSaved
+                      ? "bg-green-600 text-white"
+                      : "bg-foreground text-background hover:bg-foreground/90 disabled:opacity-40"
+                  }`}
+                >
+                  {saving ? "Saving…" : justSaved ? "Saved ✓" : "Save changes"}
+                </button>
+                {!dirty && !justSaved && (
+                  <span className="font-sans text-xs text-muted-foreground">All changes saved</span>
+                )}
+              </div>
+            )}
           </>
         )}
       </main>
