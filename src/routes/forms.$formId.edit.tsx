@@ -30,6 +30,9 @@ function EditForm() {
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [justSaved, setJustSaved] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -82,10 +85,10 @@ function EditForm() {
     setQuestions((qs) => [...qs, { ...(data as any), options: (data as any).options ?? [] }]);
   };
 
-  const updateQuestion = async (id: string, patch: Partial<Question>) => {
+  const updateQuestion = (id: string, patch: Partial<Question>) => {
     setQuestions((qs) => qs.map((q) => (q.id === id ? { ...q, ...patch } : q)));
-    const { error } = await supabase.from("questions").update(patch as any).eq("id", id);
-    if (error) setError(error.message);
+    setDirty(true);
+    setJustSaved(false);
   };
 
   const deleteQuestion = async (id: string) => {
@@ -117,6 +120,23 @@ function EditForm() {
       supabase.from("questions").update({ position: a.position }).eq("id", a.id),
       supabase.from("questions").update({ position: b.position }).eq("id", b.id),
     ]);
+  };
+
+  const saveChanges = async () => {
+    if (!dirty || !form) return;
+    setSaving(true);
+    setError(null);
+    const results = await Promise.all(
+      questions.map((q) =>
+        supabase.from("questions").update({ label: q.label, options: q.options, position: q.position }).eq("id", q.id)
+      )
+    );
+    const firstError = results.find((r) => r.error)?.error;
+    if (firstError) setError(firstError.message);
+    setSaving(false);
+    setDirty(false);
+    setJustSaved(true);
+    setTimeout(() => setJustSaved(false), 2000);
   };
 
   const publicUrl = typeof window !== "undefined" && form ? `${window.location.origin}/f/${form.id}` : "";
@@ -217,6 +237,25 @@ function EditForm() {
                 <button onClick={() => addQuestion("rating")} className="rounded-full border border-foreground/20 px-4 py-2 font-sans text-sm hover:bg-foreground hover:text-background transition-colors">+ Rating</button>
               </div>
             </section>
+
+            {questions.length > 0 && (
+              <div className="mt-6 flex items-center gap-3">
+                <button
+                  onClick={saveChanges}
+                  disabled={saving || !dirty}
+                  className={`rounded-full px-6 py-3 font-sans text-sm font-bold uppercase tracking-[0.12em] transition-colors ${
+                    justSaved
+                      ? "bg-green-600 text-white"
+                      : "bg-foreground text-background hover:bg-foreground/90 disabled:opacity-40"
+                  }`}
+                >
+                  {saving ? "Saving…" : justSaved ? "Saved ✓" : "Save changes"}
+                </button>
+                {!dirty && !justSaved && (
+                  <span className="font-sans text-xs text-muted-foreground">All changes saved</span>
+                )}
+              </div>
+            )}
           </>
         )}
       </main>
