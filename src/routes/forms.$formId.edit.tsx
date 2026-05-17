@@ -122,6 +122,23 @@ function EditForm() {
     ]);
   };
 
+  const saveChanges = async () => {
+    if (!dirty || !form) return;
+    setSaving(true);
+    setError(null);
+    const results = await Promise.all(
+      questions.map((q) =>
+        supabase.from("questions").update({ label: q.label, options: q.options, position: q.position }).eq("id", q.id)
+      )
+    );
+    const firstError = results.find((r) => r.error)?.error;
+    if (firstError) setError(firstError.message);
+    setSaving(false);
+    setDirty(false);
+    setJustSaved(true);
+    setTimeout(() => setJustSaved(false), 2000);
+  };
+
   const publicUrl = typeof window !== "undefined" && form ? `${window.location.origin}/f/${form.id}` : "";
 
   const copyLink = async () => {
