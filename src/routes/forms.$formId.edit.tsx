@@ -85,10 +85,10 @@ function EditForm() {
     setQuestions((qs) => [...qs, { ...(data as any), options: (data as any).options ?? [] }]);
   };
 
-  const updateQuestion = async (id: string, patch: Partial<Question>) => {
+  const updateQuestion = (id: string, patch: Partial<Question>) => {
     setQuestions((qs) => qs.map((q) => (q.id === id ? { ...q, ...patch } : q)));
-    const { error } = await supabase.from("questions").update(patch as any).eq("id", id);
-    if (error) setError(error.message);
+    setDirty(true);
+    setJustSaved(false);
   };
 
   const deleteQuestion = async (id: string) => {
