@@ -32,8 +32,8 @@ const Note = ({
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden paper-grain">
-      <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-24 md:pt-24 md:pb-32 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-        <div className="lg:col-span-7 animate-fade-up">
+      <div className="relative mx-auto max-w-7xl px-6 pt-16 pb-24 md:pt-24 md:pb-32">
+        <div className="max-w-3xl animate-fade-up">
           <span
             className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-2xl text-foreground"
             style={{ background: "var(--note-yellow)" }}
@@ -65,12 +65,12 @@ export function Hero() {
         </div>
 
         {/* Sticky-note collage */}
-        <div className="lg:col-span-5 relative h-[480px] md:h-[520px] animate-fade-up" style={{ animationDelay: "120ms" }}>
+        <div className="mt-20 relative h-[340px] md:h-[300px] animate-fade-up" style={{ animationDelay: "120ms" }}>
           {/* Screener question */}
           <Note
             color="var(--note-yellow)"
             rot="-4deg"
-            className="absolute top-2 left-2 w-60 p-5 animate-wobble"
+            className="absolute top-2 left-0 w-60 p-5 animate-wobble"
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">Screener · Q2</p>
             <p className="mt-2 font-display text-xl leading-snug text-foreground">
@@ -87,7 +87,7 @@ export function Hero() {
           <Note
             color="var(--note-mint)"
             rot="5deg"
-            className="absolute top-4 right-2 w-44 p-4"
+            className="absolute top-6 left-[26%] w-44 p-4"
             tape
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/60">Quota</p>
@@ -100,7 +100,7 @@ export function Hero() {
           <Note
             color="var(--note-sky)"
             rot="3deg"
-            className="absolute bottom-2 left-4 w-64 p-5 animate-wobble"
+            className="absolute top-0 left-[46%] w-64 p-5 animate-wobble"
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">SUS · 4 of 10</p>
             <p className="mt-2 font-display text-lg leading-snug text-foreground">
@@ -126,7 +126,7 @@ export function Hero() {
           <Note
             color="var(--note-coral)"
             rot="-6deg"
-            className="absolute top-[210px] right-0 w-64 p-5"
+            className="absolute top-8 right-0 w-64 p-5"
           >
             <p className="font-display text-lg italic text-foreground leading-snug">
               "...and then I just gave up at the checkout."
@@ -146,7 +146,7 @@ export function Hero() {
           {/* Hand arrow */}
           <svg
             aria-hidden
-            className="absolute top-[150px] left-[160px] w-32 h-20 hidden md:block"
+            className="absolute top-[120px] left-[22%] w-24 h-16 hidden md:block"
             viewBox="0 0 140 90"
           >
             <path
