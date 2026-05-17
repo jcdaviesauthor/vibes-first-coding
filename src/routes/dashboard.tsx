@@ -26,6 +26,8 @@ function Dashboard() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [forms, setForms] = useState<Form[]>([]);
+  const [counts, setCounts] = useState<Record<string, number>>({});
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +37,38 @@ function Dashboard() {
       .select("*")
       .order("created_at", { ascending: false });
     if (error) setError(error.message);
-    else setForms((data as Form[]) ?? []);
+    else {
+      const list = (data as Form[]) ?? [];
+      setForms(list);
+      // Load response counts in parallel
+      const entries = await Promise.all(
+        list.map(async (f) => {
+          const { count } = await supabase
+            .from("responses")
+            .select("*", { count: "exact", head: true })
+            .eq("form_id", f.id);
+          return [f.id, count ?? 0] as const;
+        })
+      );
+      setCounts(Object.fromEntries(entries));
+    }
+  };
+
+  const handleCopyLink = async (formId: string) => {
+    const url = `${window.location.origin}/f/${formId}`;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    setCopiedId(formId);
+    setTimeout(() => setCopiedId((c) => (c === formId ? null : c)), 1500);
   };
 
   useEffect(() => {
@@ -214,9 +247,19 @@ function Dashboard() {
                         <p className="mt-2 font-sans text-sm text-foreground/80 leading-relaxed">{f.description}</p>
                       )}
                     </Link>
-                    <div className="mt-3 flex gap-3 font-sans text-xs font-bold uppercase tracking-[0.12em]">
+                    <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-foreground/70">
+                      {counts[f.id] ?? 0} {(counts[f.id] ?? 0) === 1 ? "response" : "responses"}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-x-3 gap-y-2 font-sans text-xs font-bold uppercase tracking-[0.12em]">
                       <Link to="/forms/$formId/edit" params={{ formId: f.id }} className="text-foreground/60 hover:text-foreground">Edit →</Link>
                       <Link to="/forms/$formId/responses" params={{ formId: f.id }} className="text-foreground/60 hover:text-foreground">View responses →</Link>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); handleCopyLink(f.id); }}
+                        className="text-foreground/60 hover:text-foreground"
+                      >
+                        {copiedId === f.id ? "Copied ✓" : "Share link"}
+                      </button>
                     </div>
                   </li>
                 );
