@@ -5,7 +5,8 @@ import { Nav } from "@/components/landing/Nav";
 
 type Form = { id: string; title: string; description: string | null; user_id: string };
 type Question = { id: string; type: string; label: string; options: string[]; position: number };
-type Response = { id: string; submitted_at: string; answers: Record<string, any> };
+type AnswerItem = { question_id: string; label?: string; type?: string; answer: any };
+type Response = { id: string; submitted_at: string; answers: AnswerItem[] | Record<string, any> };
 
 export const Route = createFileRoute("/forms/$formId/responses")({
   head: () => ({ meta: [{ title: "Responses — Buddy" }] }),
@@ -47,6 +48,13 @@ function ResponsesPage() {
     })();
   }, [formId, navigate]);
 
+  const getAnswer = (r: Response, q: Question): any => {
+    if (Array.isArray(r.answers)) {
+      return r.answers.find((a) => a?.question_id === q.id)?.answer;
+    }
+    return (r.answers as Record<string, any>)?.[q.id];
+  };
+
   const renderAnswer = (q: Question, val: any) => {
     if (val === undefined || val === null || val === "") return <span className="text-foreground/40 italic">No answer</span>;
     if (q.type === "rating") return <span>{"★".repeat(Number(val))}<span className="text-foreground/30">{"☆".repeat(Math.max(0, 5 - Number(val)))}</span></span>;
@@ -58,7 +66,7 @@ function ResponsesPage() {
     const rows = responses.map((r) => [
       new Date(r.submitted_at).toISOString(),
       ...questions.map((q) => {
-        const v = r.answers?.[q.id];
+        const v = getAnswer(r, q);
         return v == null ? "" : String(v).replace(/"/g, '""');
       }),
     ]);
@@ -130,7 +138,7 @@ function ResponsesPage() {
                   {questions.map((q) => (
                     <div key={q.id}>
                       <dt className="font-sans text-xs font-bold uppercase tracking-[0.12em] text-foreground/60">{q.label}</dt>
-                      <dd className="mt-1 font-sans text-sm text-foreground">{renderAnswer(q, r.answers?.[q.id])}</dd>
+                      <dd className="mt-1 font-sans text-sm text-foreground">{renderAnswer(q, getAnswer(r, q))}</dd>
                     </div>
                   ))}
                 </dl>
