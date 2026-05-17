@@ -41,7 +41,7 @@ export function Hero() {
             A form tool for researchers
           </span>
           <h1 className="font-display mt-8 text-5xl md:text-6xl leading-[1.05] text-foreground tracking-tight">
-            Research that<br />actually flows.
+            Rigorous research<br />that feels like recess.
           </h1>
           <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             You're cobbling Typeform, Calendly, Airtable, Sheets, and Slack into something that almost works.
