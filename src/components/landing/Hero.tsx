@@ -100,7 +100,7 @@ export function Hero() {
           <Note
             color="var(--note-sky)"
             rot="3deg"
-            className="absolute top-[230px] right-0 w-64 p-5 animate-wobble"
+            className="absolute bottom-2 left-4 w-64 p-5 animate-wobble"
           >
             <p className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">SUS · 4 of 10</p>
             <p className="mt-2 font-display text-lg leading-snug text-foreground">
@@ -126,7 +126,7 @@ export function Hero() {
           <Note
             color="var(--note-coral)"
             rot="-6deg"
-            className="absolute bottom-2 left-4 w-72 p-5"
+            className="absolute top-[210px] right-0 w-64 p-5"
           >
             <p className="font-display text-lg italic text-foreground leading-snug">
               "...and then I just gave up at the checkout."
