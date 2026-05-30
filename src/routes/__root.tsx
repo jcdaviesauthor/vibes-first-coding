@@ -82,6 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@buddyresearch" },
       { name: "twitter:title", content: "Buddy — The research buddy for UXRs" },
       { name: "twitter:description", content: "Buddy is a form tool built for UX researchers. Screeners with quotas, research-native question types, auto-tagged open text, and a panel that remembers." },
+      // TODO: replace with a permanent hosted image — this Lovable CDN URL may expire
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7257320d-eab0-41b7-9d46-359cc16bc6a2/id-preview-225b90b4--a259ad78-0829-4fc4-a9ee-1690b6d0649a.lovable.app-1778980840242.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7257320d-eab0-41b7-9d46-359cc16bc6a2/id-preview-225b90b4--a259ad78-0829-4fc4-a9ee-1690b6d0649a.lovable.app-1778980840242.png" },
     ],

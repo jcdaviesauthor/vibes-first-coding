@@ -2,11 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Nav } from "@/components/landing/Nav";
-
-type Form = { id: string; title: string; description: string | null; user_id: string };
-type Question = { id: string; type: string; label: string; options: string[]; position: number };
-type AnswerItem = { question_id: string; label?: string; type?: string; answer: any };
-type Response = { id: string; submitted_at: string; answers: AnswerItem[] | Record<string, any> };
+import type { Form, Question, Response } from "@/types";
 
 export const Route = createFileRoute("/forms/$formId/responses")({
   head: () => ({ meta: [{ title: "Responses — Buddy" }] }),
@@ -41,18 +37,20 @@ function ResponsesPage() {
         supabase.from("questions").select("*").eq("form_id", formId).order("position", { ascending: true }),
         supabase.from("responses").select("*").eq("form_id", formId).order("submitted_at", { ascending: false }),
       ]);
-      setQuestions((qs ?? []).map((q: any) => ({ ...q, options: q.options ?? [] })));
+      setQuestions((qs ?? []).map((q) => ({ ...q, options: Array.isArray(q.options) ? q.options as string[] : [] })));
       if (re) setError(re.message);
       else setResponses((rs as Response[]) ?? []);
       setLoading(false);
     })();
   }, [formId, navigate]);
 
-  const getAnswer = (r: Response, q: Question): any => {
+  const getAnswer = (r: Response, q: Question): string | number | null | undefined => {
+    // Responses saved after the schema change store answers as an array of {question_id, answer} objects.
+    // Older responses stored answers as a flat {[question_id]: answer} object.
     if (Array.isArray(r.answers)) {
-      return r.answers.find((a) => a?.question_id === q.id)?.answer;
+      return r.answers.find((a) => a?.question_id === q.id)?.answer ?? null;
     }
-    return (r.answers as Record<string, any>)?.[q.id];
+    return (r.answers as Record<string, string | number | null>)?.[q.id] ?? null;
   };
 
   const renderAnswer = (q: Question, val: any) => {
@@ -84,7 +82,11 @@ function ResponsesPage() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Nav />
-        <main className="mx-auto max-w-5xl px-6 py-16 font-sans text-sm text-muted-foreground">Loading…</main>
+        <main className="mx-auto max-w-5xl px-6 py-16 space-y-4 animate-pulse">
+          <div className="h-10 w-1/2 rounded-lg bg-foreground/10" />
+          <div className="h-4 w-1/4 rounded bg-foreground/10" />
+          {[1, 2, 3].map((n) => <div key={n} className="h-28 rounded-2xl bg-foreground/10" />)}
+        </main>
       </div>
     );
   }
