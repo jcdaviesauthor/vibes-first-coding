@@ -27,7 +27,7 @@ function FillForm() {
       if (fe || !f) setError(fe?.message ?? "Form not found");
       else setForm(f as Form);
       if (qe) setError(qe.message);
-      else setQuestions((qs ?? []).map((q) => ({ ...q, options: Array.isArray(q.options) ? q.options as string[] : [] })));
+      else setQuestions((qs ?? []).map((q) => ({ ...q, type: q.type as Question["type"], options: Array.isArray(q.options) ? q.options as string[] : [] })));
       setLoading(false);
     })();
   }, [formId]);

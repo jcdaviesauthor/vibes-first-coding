@@ -27,16 +27,17 @@ function Dashboard() {
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   const loadForms = async (userId: string) => {
-    const [{ data, error }, { data: responseCounts }] = await Promise.all([
-      supabase.from("forms").select("*").eq("user_id", userId).order("created_at", { ascending: false }),
-      supabase.from("responses").select("form_id").in(
-        "form_id",
-        // sub-select to avoid fetching all responses — filtered to this user's forms
-        supabase.from("forms").select("id").eq("user_id", userId)
-      ),
-    ]);
+    const { data, error } = await supabase
+      .from("forms")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
     if (error) { setError(error.message); return; }
     const list = (data as Form[]) ?? [];
+    const formIds = list.map((f) => f.id);
+    const { data: responseCounts } = formIds.length
+      ? await supabase.from("responses").select("form_id").in("form_id", formIds)
+      : { data: [] as { form_id: string }[] };
     setForms(list);
     const countMap: Record<string, number> = {};
     for (const row of responseCounts ?? []) {
