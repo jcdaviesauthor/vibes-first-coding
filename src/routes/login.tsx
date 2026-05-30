@@ -37,13 +37,18 @@ function LoginPage() {
       return;
     }
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: parsed.data.email,
       password: parsed.data.password,
     });
     setLoading(false);
     if (error) {
       setError(error.message);
+      return;
+    }
+    if (!data.user.email_confirmed_at) {
+      await supabase.auth.signOut();
+      setError("Please verify your email before logging in. Check your inbox for a confirmation link.");
       return;
     }
     navigate({ to: "/dashboard" });

@@ -27,6 +27,7 @@ function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +38,7 @@ function SignupPage() {
       return;
     }
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
       password: parsed.data.password,
       options: { emailRedirectTo: `${window.location.origin}/dashboard` },
@@ -47,8 +48,43 @@ function SignupPage() {
       setError(error.message);
       return;
     }
+    // If email confirmation is required, the session will be null
+    if (!data.session) {
+      setVerificationSent(true);
+      return;
+    }
     navigate({ to: "/dashboard" });
   };
+
+  if (verificationSent) {
+    return (
+      <div className="min-h-screen bg-background text-foreground paper-grain">
+        <Nav />
+        <main className="mx-auto max-w-md px-6 py-16 text-center">
+          <span
+            className="inline-block note-shadow px-4 py-2 -rotate-2 font-hand text-2xl text-foreground"
+            style={{ background: "var(--note-mint)" }}
+          >
+            One more step
+          </span>
+          <h1 className="font-display mt-6 text-5xl leading-tight tracking-tight">Check your email</h1>
+          <p className="mt-4 font-sans text-base text-foreground/70">
+            We've sent a verification link to <strong>{email}</strong>.
+            Click it to confirm your account, then come back and log in.
+          </p>
+          <p className="mt-3 font-sans text-sm text-muted-foreground">
+            Can't find it? Check your spam folder.
+          </p>
+          <Link
+            to="/login"
+            className="mt-8 inline-flex items-center rounded-full bg-foreground text-background px-6 py-3 font-sans text-sm font-bold tracking-tight hover:-translate-y-0.5 transition-transform"
+          >
+            Go to log in
+          </Link>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground paper-grain">

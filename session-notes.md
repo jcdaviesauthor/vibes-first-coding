@@ -82,7 +82,14 @@ Located at: `~/vibes-first-coding`
 | Priority | Task | Why |
 |----------|------|-----|
 | High | Migrate data fetching to React Query | Currently every page re-fetches everything from scratch on each visit. React Query adds caching, deduplication, and background refresh — makes the app feel faster and reduces DB load |
+| High | Move to own Supabase account (or Neon + Clerk) | Current Supabase project is owned by Lovable — can't change settings like email confirmation. When building the real app, create a fresh project under our own account |
 | Medium | Replace hardcoded Lovable CDN OG image with a permanent hosted asset | Current URL may expire, breaking social share previews silently |
+
+### Infrastructure Decisions
+| Decision | Reason |
+|----------|--------|
+| Staying on Lovable's Supabase for now | Fine for homework — email confirmation can't be enabled but app is functional for testing |
+| Will migrate to own Supabase (or Neon + Clerk) for real app | Need full ownership of the database and auth settings |
 
 ---
 
