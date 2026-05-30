@@ -37,7 +37,7 @@ function ResponsesPage() {
         supabase.from("questions").select("*").eq("form_id", formId).order("position", { ascending: true }),
         supabase.from("responses").select("*").eq("form_id", formId).order("submitted_at", { ascending: false }),
       ]);
-      setQuestions((qs ?? []).map((q) => ({ ...q, options: Array.isArray(q.options) ? q.options as string[] : [] })));
+      setQuestions((qs ?? []).map((q) => ({ ...q, type: q.type as Question["type"], options: Array.isArray(q.options) ? q.options as string[] : [] })));
       if (re) setError(re.message);
       else setResponses((rs as Response[]) ?? []);
       setLoading(false);

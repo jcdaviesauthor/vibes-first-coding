@@ -51,7 +51,7 @@ function EditForm() {
         .eq("form_id", formId)
         .order("position", { ascending: true });
       if (qe) setError(qe.message);
-      else setQuestions((qs ?? []).map((q) => ({ ...q, options: Array.isArray(q.options) ? q.options as string[] : [] })));
+      else setQuestions((qs ?? []).map((q) => ({ ...q, type: q.type as QType, options: Array.isArray(q.options) ? q.options as string[] : [] })));
       setLoading(false);
     })();
   }, [formId, navigate]);
