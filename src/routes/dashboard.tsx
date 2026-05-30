@@ -90,7 +90,11 @@ function Dashboard() {
       .insert({ title: title.trim(), description: description.trim() || null, user_id: uid });
     setLoading(false);
     if (error) {
-      setError(error.message);
+      setError(
+        error.message.toLowerCase().includes("row-level") || error.message.toLowerCase().includes("violates")
+          ? "Your account isn't verified yet. Check your email for a confirmation link, then try again."
+          : error.message
+      );
       return;
     }
     setTitle("");
