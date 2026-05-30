@@ -1,14 +1,8 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Nav } from "@/components/landing/Nav";
-
-type Form = {
-  id: string;
-  title: string;
-  description: string | null;
-  created_at: string;
-};
+import type { Form } from "@/types";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -30,44 +24,29 @@ function Dashboard() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
   const loadForms = async (userId: string) => {
-    const { data, error } = await supabase
-      .from("forms")
-      .select("*")
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false });
-    if (error) setError(error.message);
-    else {
-      const list = (data as Form[]) ?? [];
-      setForms(list);
-      // Load response counts in parallel
-      const entries = await Promise.all(
-        list.map(async (f) => {
-          const { count } = await supabase
-            .from("responses")
-            .select("*", { count: "exact", head: true })
-            .eq("form_id", f.id);
-          return [f.id, count ?? 0] as const;
-        })
-      );
-      setCounts(Object.fromEntries(entries));
+    const [{ data, error }, { data: responseCounts }] = await Promise.all([
+      supabase.from("forms").select("*").eq("user_id", userId).order("created_at", { ascending: false }),
+      supabase.from("responses").select("form_id").in(
+        "form_id",
+        // sub-select to avoid fetching all responses — filtered to this user's forms
+        supabase.from("forms").select("id").eq("user_id", userId)
+      ),
+    ]);
+    if (error) { setError(error.message); return; }
+    const list = (data as Form[]) ?? [];
+    setForms(list);
+    const countMap: Record<string, number> = {};
+    for (const row of responseCounts ?? []) {
+      countMap[row.form_id] = (countMap[row.form_id] ?? 0) + 1;
     }
+    setCounts(countMap);
   };
 
   const handleCopyLink = async (formId: string) => {
-    const url = `${window.location.origin}/f/${formId}`;
-    try {
-      await navigator.clipboard.writeText(url);
-    } catch {
-      // fallback
-      const ta = document.createElement("textarea");
-      ta.value = url;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-    }
+    await navigator.clipboard.writeText(`${window.location.origin}/f/${formId}`);
     setCopiedId(formId);
     setTimeout(() => setCopiedId((c) => (c === formId ? null : c)), 1500);
   };
@@ -84,10 +63,7 @@ function Dashboard() {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       if (!session) {
         navigate({ to: "/login" });
-        return;
       }
-      setEmail(session.user.email ?? null);
-      loadForms(session.user.id);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
@@ -123,9 +99,8 @@ function Dashboard() {
   };
 
   const focusTitle = () => {
-    const el = document.getElementById("form-title-input") as HTMLInputElement | null;
-    el?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setTimeout(() => el?.focus(), 300);
+    titleInputRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => titleInputRef.current?.focus(), 300);
   };
 
   return (
@@ -169,7 +144,7 @@ function Dashboard() {
             <span className="font-sans text-base font-bold uppercase tracking-[0.12em] text-foreground">Form title</span>
             <input
               type="text"
-              id="form-title-input"
+              ref={titleInputRef}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. research shit."

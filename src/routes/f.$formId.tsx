@@ -1,10 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-
-type QType = "short_text" | "multiple_choice" | "rating";
-type Question = { id: string; type: QType; label: string; options: string[]; position: number };
-type Form = { id: string; title: string; description: string | null };
+import type { Form, Question } from "@/types";
 
 export const Route = createFileRoute("/f/$formId")({
   head: () => ({ meta: [{ title: "Fill out form" }] }),
@@ -30,7 +27,7 @@ function FillForm() {
       if (fe || !f) setError(fe?.message ?? "Form not found");
       else setForm(f as Form);
       if (qe) setError(qe.message);
-      else setQuestions((qs ?? []).map((q: any) => ({ ...q, options: q.options ?? [] })));
+      else setQuestions((qs ?? []).map((q) => ({ ...q, options: Array.isArray(q.options) ? q.options as string[] : [] })));
       setLoading(false);
     })();
   }, [formId]);
@@ -52,7 +49,17 @@ function FillForm() {
   };
 
   if (loading) {
-    return <main className="min-h-screen bg-background text-foreground flex items-center justify-center font-sans text-sm text-muted-foreground">Loading…</main>;
+    return (
+      <main className="min-h-screen bg-background text-foreground paper-grain">
+        <div className="mx-auto max-w-2xl px-6 py-16 space-y-6 animate-pulse">
+          <div className="h-10 w-2/3 rounded-lg bg-foreground/10" />
+          <div className="h-4 w-1/2 rounded bg-foreground/10" />
+          <div className="space-y-4 mt-8">
+            {[1, 2, 3].map((n) => <div key={n} className="h-16 rounded-xl bg-foreground/10" />)}
+          </div>
+        </div>
+      </main>
+    );
   }
 
   if (!form) {

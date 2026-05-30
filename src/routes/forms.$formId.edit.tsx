@@ -2,19 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Nav } from "@/components/landing/Nav";
-
-type QType = "short_text" | "multiple_choice" | "rating";
-
-type Question = {
-  id: string;
-  form_id: string;
-  type: QType;
-  label: string;
-  options: string[];
-  position: number;
-};
-
-type Form = { id: string; title: string; description: string | null; user_id: string };
+import type { Form, Question, QType } from "@/types";
 
 export const Route = createFileRoute("/forms/$formId/edit")({
   head: () => ({ meta: [{ title: "Edit form — Buddy" }] }),
@@ -63,7 +51,7 @@ function EditForm() {
         .eq("form_id", formId)
         .order("position", { ascending: true });
       if (qe) setError(qe.message);
-      else setQuestions((qs ?? []).map((q: any) => ({ ...q, options: q.options ?? [] })));
+      else setQuestions((qs ?? []).map((q) => ({ ...q, options: Array.isArray(q.options) ? q.options as string[] : [] })));
       setLoading(false);
     })();
   }, [formId, navigate]);
@@ -82,7 +70,7 @@ function EditForm() {
       .select()
       .single();
     if (error) return setError(error.message);
-    setQuestions((qs) => [...qs, { ...(data as any), options: (data as any).options ?? [] }]);
+    setQuestions((qs) => [...qs, { ...data, options: Array.isArray(data.options) ? data.options as string[] : [] } as Question]);
   };
 
   const updateQuestion = (id: string, patch: Partial<Question>) => {
@@ -101,8 +89,8 @@ function EditForm() {
       setQuestions(prev);
       return;
     }
-    await Promise.all(
-      next.map((q) => supabase.from("questions").update({ position: q.position }).eq("id", q.id))
+    await supabase.from("questions").upsert(
+      next.map((q) => ({ id: q.id, form_id: q.form_id, type: q.type, label: q.label, options: q.options, position: q.position }))
     );
   };
 
@@ -126,12 +114,9 @@ function EditForm() {
     if (!dirty || !form) return;
     setSaving(true);
     setError(null);
-    const results = await Promise.all(
-      questions.map((q) =>
-        supabase.from("questions").update({ label: q.label, options: q.options, position: q.position }).eq("id", q.id)
-      )
+    const { error: firstError } = await supabase.from("questions").upsert(
+      questions.map((q) => ({ id: q.id, form_id: q.form_id, type: q.type, label: q.label, options: q.options, position: q.position }))
     );
-    const firstError = results.find((r) => r.error)?.error;
     if (firstError) setError(firstError.message);
     setSaving(false);
     setDirty(false);
@@ -152,7 +137,11 @@ function EditForm() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Nav />
-        <main className="mx-auto max-w-4xl px-6 py-16 font-sans text-sm text-muted-foreground">Loading…</main>
+        <main className="mx-auto max-w-4xl px-6 py-16 space-y-4 animate-pulse">
+          <div className="h-10 w-1/2 rounded-lg bg-foreground/10" />
+          <div className="h-4 w-1/3 rounded bg-foreground/10" />
+          {[1, 2, 3].map((n) => <div key={n} className="h-24 rounded-2xl bg-foreground/10" />)}
+        </main>
       </div>
     );
   }
